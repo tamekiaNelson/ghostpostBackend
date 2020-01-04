@@ -1,0 +1,7 @@
+<h1>Add your own roast or boast </h1>
+<a href="/">Take me back to Jokes are R Us!</a>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Sumbit Your Best Work">
+</form>
