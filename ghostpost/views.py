@@ -14,7 +14,8 @@ class GhostPostView(viewsets.ModelViewSet):
         post.total_votes += 1
         post.save()
         return Response({'status': 'like'})
-
+    
+    @action(detail=True, methods=['get'])
     def down_votes(self, request, pk=None):
         post = models.GhostPoster.objects.get(pk=pk)
         post.down_votes += 1
