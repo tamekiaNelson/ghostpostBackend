@@ -15,18 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
+from rest_framework import routers
 from ghostpost import views
-from ghostpost.models import GhostPoster
 
-admin.site.register(GhostPoster)
+
+router = routers.DefaultRouter()
+router.register(r'GhostPoster', views.GhostPostView)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='/'),
-    path('addpost/', views.ghostpostaddview, name='addpost'),
-    path('upvote/<int:id>/', views.up_votes, name='upvote'),
-    path('downvote/<int:id>/', views.down_votes, name='downvote'),
-    path('boasts/', views.sort_is_a_boast, name='boast'),
-    path('roasts/', views.sort_is_a_roast, name='roast'),
-    path('all/', views.sort_all_posts, name='all')
+    url(r'^', include(router.urls))
 ]
